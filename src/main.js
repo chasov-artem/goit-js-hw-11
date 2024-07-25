@@ -36,23 +36,35 @@ function handleSearch(event) {
 
   searchImageByQuery(queryValue)
     .then(data => {
-      if (data) {
-        renderImages(data);
+      if (data.hits.length > 0) {
+        renderImages(data.hits);
       } else {
-        onFetchError(new Error('No data returned'));
+        iziToast.info({
+          title: 'Info',
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+        });
       }
     })
     .catch(onFetchError)
     .finally(() => searchForm.reset());
 }
 
-function renderImages(data) {
+function renderImages(images) {
   imageContainer.innerHTML = '';
-  data.hits.forEach(hit => {
-    const img = document.createElement('img');
-    img.src = hit.previewURL;
-    img.alt = hit.tags;
-    imageContainer.appendChild(img);
+  images.forEach(image => {
+    const imgCard = document.createElement('div');
+    imgCard.classList.add('image-card');
+    imgCard.innerHTML = `
+      <img src="${image.webformatURL}" alt="${image.tags}" />
+      <div class="info">
+        <p><strong>Likes:</strong> ${image.likes}</p>
+        <p><strong>Views:</strong> ${image.views}</p>
+        <p><strong>Comments:</strong> ${image.comments}</p>
+        <p><strong>Downloads:</strong> ${image.downloads}</p>
+      </div>
+    `;
+    imageContainer.appendChild(imgCard);
   });
 }
 
