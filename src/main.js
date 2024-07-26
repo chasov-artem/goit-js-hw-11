@@ -60,10 +60,10 @@ function renderImages(images) {
     imgCard.innerHTML = `
       <img src="${image.webformatURL}" alt="${image.tags}" />
       <div class="info">
-        <p><strong>Likes:</strong> ${image.likes}</p>
-        <p><strong>Views:</strong> ${image.views}</p>
-        <p><strong>Comments:</strong> ${image.comments}</p>
-        <p><strong>Downloads:</strong> ${image.downloads}</p>
+        <p><strong class="strong">Like</strong> ${image.likes}</p>
+        <p><strong class="strong">Views</strong> ${image.views}</p>
+        <p><strong class="strong">Comments</strong> ${image.comments}</p>
+        <p><strong class="strong">Downloads</strong> ${image.downloads}</p>
       </div>
     `;
     imageContainer.appendChild(imgCard);
