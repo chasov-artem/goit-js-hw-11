@@ -21,3 +21,32 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid #808080;
+  width: 360px;
+  height: 200px;
+}
+
+.gallery {
+  width: 1440px;
+  background: #fff;
+  padding: 24px 156px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  flex-direction: row;
+}
+
+.image-card {
+  width: 360px;
+  height: 200px;
+}
