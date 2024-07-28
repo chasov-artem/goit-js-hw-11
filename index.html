@@ -6,10 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla App Template</title>
     
+    <link
+      rel="stylesheet"
+      href="node_modules/izitoast/dist/css/iziToast.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/simplelightbox/dist/simple-lightbox.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/css-loader/dist/css-loader.min.css"
+    />
     <script type="module" crossorigin src="/vanilla-app-template/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/vanilla-app-template/assets/vendor-8e8cd629.js">
-    <link rel="stylesheet" href="/vanilla-app-template/assets/vendor-1cd1f9d9.css">
-    <link rel="stylesheet" href="/vanilla-app-template/assets/index-cf78b0fe.css">
+    <link rel="modulepreload" crossorigin href="/vanilla-app-template/assets/vendor-0fc460d7.js">
+    <link rel="stylesheet" href="/vanilla-app-template/assets/vendor-4b066c51.css">
+    <link rel="stylesheet" href="/vanilla-app-template/assets/index-f169e41e.css">
   </head>
   <body>
     <form class="form-inline">
@@ -23,6 +35,7 @@
       </div>
       <button type="submit" class="btn">Search</button>
     </form>
+    <div class="loader" id="loader"></div>
     <div class="gallery image-container"></div>
     
     
