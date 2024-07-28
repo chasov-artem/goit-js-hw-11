@@ -2,23 +2,14 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import pathSprite from '../src/img/icon.svg';
 
-function searchImageByQuery(query) {
-  const URL = 'https://pixabay.com/api/';
-  const API_KEY = '45098523-0f66f1bf08e0be6a1e71621a5';
-
-  return fetch(
-    `${URL}?key=${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true`
-  ).then(response => {
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-    return response.json();
-  });
-}
+import { searchImageByQuery } from './js/pixabay-api.js';
+import { renderImages, onFetchError } from './js/render-functions';
 
 const searchForm = document.querySelector('.form-inline');
 const imageContainer = document.querySelector('.image-container');
+const loader = document.querySelector('.loader');
 
 searchForm.addEventListener('submit', handleSearch);
 
@@ -30,11 +21,17 @@ function handleSearch(event) {
 
   if (queryValue === '') {
     iziToast.warning({
-      title: 'Warning',
+      title: '',
       message: 'Search query cannot be empty.',
+      position: 'topRight',
+      backgroundColor: 'red',
+      icon: '',
+      iconUrl: `${pathSprite}#icon-Group-1`,
     });
     return;
   }
+
+  loader.style.display = 'block';
 
   searchImageByQuery(queryValue)
     .then(data => {
@@ -45,34 +42,14 @@ function handleSearch(event) {
           title: 'Info',
           message:
             'Sorry, there are no images matching your search query. Please try again!',
+          position: 'topRight',
+          iconUrl: `${pathSprite}#icon-Group-1`,
         });
       }
     })
     .catch(onFetchError)
-    .finally(() => searchForm.reset());
-}
-
-function renderImages(images) {
-  imageContainer.innerHTML = '';
-  images.forEach(image => {
-    const imgCard = document.createElement('div');
-    imgCard.classList.add('image-card');
-    imgCard.innerHTML = `
-      <img src="${image.webformatURL}" alt="${image.tags}" />
-      <div class="info">
-        <p><strong class="strong">Like</strong> ${image.likes}</p>
-        <p><strong class="strong">Views</strong> ${image.views}</p>
-        <p><strong class="strong">Comments</strong> ${image.comments}</p>
-        <p><strong class="strong">Downloads</strong> ${image.downloads}</p>
-      </div>
-    `;
-    imageContainer.appendChild(imgCard);
-  });
-}
-
-function onFetchError(error) {
-  iziToast.error({
-    title: 'Error',
-    message: `Failed to fetch images: ${error.message}`,
-  });
+    .finally(() => {
+      loader.style.display = 'none';
+      searchForm.reset();
+    });
 }
