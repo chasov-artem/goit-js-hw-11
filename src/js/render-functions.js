@@ -36,9 +36,10 @@ export function onFetchError(error) {
   const loader = document.getElementById('loader');
   loader.style.display = 'none';
   iziToast.error({
-    title: 'Error',
+    title: '',
     message: `Failed to fetch images: ${error.message}`,
     iconUrl: `${spritePath}#icon-Group-1`,
     position: 'topRight',
+    backgroundColor: 'red',
   });
 }

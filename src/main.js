@@ -38,8 +38,9 @@ function handleSearch(event) {
       if (data.hits.length > 0) {
         renderImages(data.hits);
       } else {
-        iziToast.info({
-          title: 'Info',
+        iziToast.warning({
+          title: '',
+          backgroundColor: 'red',
           message:
             'Sorry, there are no images matching your search query. Please try again!',
           position: 'topRight',
